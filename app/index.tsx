@@ -1,10 +1,10 @@
-import { Image, StyleSheet, Platform, Text, View } from 'react-native';
+import { Image, StyleSheet, Platform, Text, View, TouchableOpacity } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { Link } from 'expo-router';
+// import { HelloWave } from '@/components/HelloWave';
+// import ParallaxScrollView from '@/components/ParallaxScrollView';
+// import { ThemedText } from '@/components/ThemedText';
+// import { ThemedView } from '@/components/ThemedView';
+import { Link, router } from 'expo-router';
 import './tailwind.css'
 
 export default function HomeScreen() {
@@ -14,9 +14,17 @@ export default function HomeScreen() {
       kjdkjk dahgdhsgdas da
      </Text>
 
-     <Link href={'/Sign-in'}>
-        login
+     <Link href={'/Restaurant'}>
+        login fdsf
      </Link>
+    <TouchableOpacity
+    onPress={()=> router.push('/Sign-in')}
+    >
+      <Text>
+        Test
+      </Text>
+    </TouchableOpacity>
+
    </View>
   );
 }

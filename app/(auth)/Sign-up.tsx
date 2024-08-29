@@ -4,17 +4,18 @@ import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { router } from 'expo-router';
 import { useForm, Controller } from 'react-hook-form'
+import CustomButton from '@/components/CustomButton';
 
 
 type FormData = {
-    username: String,
-    matricule: String,
+    username: string,
+    matricule: string,
     password: string,
-    confirmPassword: String
+    confirmPassword: string
 
 }
 
-const Signin = () => {
+const SignUp = () => {
     const { handleSubmit, control } = useForm<FormData>()
 
     const verifPassword = (data:FormData)=>{
@@ -40,33 +41,33 @@ const Signin = () => {
             keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0} // ajuste la valeur selon tes besoins
         >
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                <StatusBar style='light' />
-                <Animated.Image entering={FadeInUp.delay(200).duration(3000)} className="h-[90%] w-full absolute" source={require('@/assets/images/background.png')} />
+                <StatusBar backgroundColor='#FFA001' />
+                <Animated.Image entering={FadeInUp.delay(200).duration(3000)} className="mt-4 h-[54%] w-full absolute" source={require('@/assets/images/Signup.gif')} />
 
 
-                <View className='flex-row justify-around w-full absolute'>
-                    <Animated.Image entering={FadeInUp.delay(200).duration(1000).springify().damping(3)} className='h-[110] w-[43]' source={require('@/assets/images/light.png')} />
-                    <Animated.Image entering={FadeInUp.delay(200).duration(1000).springify().damping(3)} className='h-40 w-40 ' source={require('@/assets/images/logo.png')} />
-                    <Animated.Image entering={FadeInUp.delay(200).duration(1000).springify().damping(3)} className='h-[160] w-[65]' source={require('@/assets/images/light.png')} />
+                <View className=' flex-row justify-around w-full absolute'>
+                    {/* <Animated.Image entering={FadeInUp.delay(200).duration(1000).springify().damping(3)} className='h-40 w-40 ' source={require('@/assets/images/logo.png')} /> */}
+                    <Animated.Image entering={FadeInUp.delay(200).duration(1000).springify().damping(3)} tintColor={'#FFA001'} className='h-[200] w-[85]' source={require('@/assets/images/light.png')} />
+                    <Animated.Image entering={FadeInUp.delay(200).duration(1000).springify().damping(3)} tintColor={'#FFA001'} className='h-[140] w-[60]' source={require('@/assets/images/light.png')} />
 
                 </View>
 
-                <View className='h-full w-full flex flex-col gap-y-20 mt-24'>
-                    <View className='flex items-center'>
+                <View className='h-full w-full flex flex-col gap-y-20 mt-60'>
+                    {/* <View className='flex items-center'>
                         <Animated.Text entering={FadeInUp.delay(1000).springify()} className='text-white font-bold tracking-wider text-2xl'>
-                            Signin
+                            SignUp
                         </Animated.Text>
-                    </View>
+                    </View> */}
 
                     <View className='flex items-center mx-4 space-y-2'>
 
                         <Controller
                             control={control}
-                            name="usename"
+                            name="username"
                             render={({ field: { onChange, onBlur, value } }) => (
                                 <Animated.View
                                     entering={FadeInDown.duration(1000).springify()}
-                                    className='bg-black/5 p-3 rounded-2xl w-full'
+                                    className='bg-black/5 mt-4 p-1 rounded-2xl w-full'
                                 >
                                     <TextInput
                                         placeholder='username'
@@ -85,7 +86,7 @@ const Signin = () => {
                             render={({ field: { onChange, onBlur, value } }) => (
                                 <Animated.View
                                     entering={FadeInDown.duration(1000).springify()}
-                                    className='bg-black/5 p-3 rounded-2xl w-full'
+                                    className='bg-black/5 p-1 mt-2 rounded-2xl w-full'
                                 >
                                     <TextInput
                                         placeholder='Matricule'
@@ -102,7 +103,7 @@ const Signin = () => {
                             control={control}
                             name="password"
                             render={({ field: { onChange, onBlur, value } }) => (
-                                <Animated.View entering={FadeInDown.delay(200).duration(1000).springify()} className='bg-black/5 mt-2  p-2 rounded-2xl w-full'>
+                                <Animated.View entering={FadeInDown.delay(200).duration(1000).springify()} className='bg-black/5 mt-2  p-1 rounded-2xl w-full'>
                                     <TextInput
                                         placeholder='Password'
                                         placeholderTextColor={'gray'}
@@ -116,7 +117,7 @@ const Signin = () => {
                             name="confirmPassword"
                             render={({ field: { onChange, onBlur, value } }) => (
 
-                                <Animated.View entering={FadeInDown.delay(200).duration(1000).springify()} className='bg-black/5 mt-2 p-2 rounded-2xl w-full'>
+                                <Animated.View entering={FadeInDown.delay(200).duration(1000).springify()} className='bg-black/5 mt-2 p-1 rounded-2xl w-full'>
                                     <TextInput
                                         placeholder='Confirm password'
                                         placeholderTextColor={'gray'}
@@ -130,22 +131,16 @@ const Signin = () => {
 
 
                         <Animated.View entering={FadeInDown.delay(400).duration(1000).springify()} className='w-full'>
-                            <TouchableOpacity className='flex items-center p-4 rounded-full bg-sky-500 w-full'>
-                                <Text className='text-white text-bold text-xl'
-                                    onPress={handleSubmit(onSubmit)}
-                                >
-                                    Signin
-                                </Text>
-                            </TouchableOpacity>
+                        <CustomButton  padding={3} label={'Create Account'}/>
                         </Animated.View>
 
                         <View className='flex-row gap-x-3 justify-center'>
                             <Text>
                                 Don't have an account?
                             </Text>
-                            <TouchableOpacity onPress={() => router.push('/Sign-up')}>
-                                <Text className='text-sky-400'>
-                                    Signup
+                            <TouchableOpacity onPress={() => router.push('/Sign-in')}>
+                                <Text className='text-light-tabBarActiveTintColor'>
+                                    Sign-in
                                 </Text>
                             </TouchableOpacity>
                         </View>
@@ -157,4 +152,4 @@ const Signin = () => {
 
 }
 
-export default Signin;
+export default SignUp;

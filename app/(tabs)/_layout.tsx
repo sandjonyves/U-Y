@@ -1,15 +1,20 @@
-import { SplashScreen, Stack, Tabs,Redirect } from 'expo-router';
+// import { SplashScreen, Stack, Tabs,Redirect } from 'expo-router';
 import React, { useEffect } from 'react';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import {useFonts} from 'expo-font'
+// import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+// import { Colors } from '@/constants/Colors';
+// import { useColorScheme } from '@/hooks/useColorScheme';
+// import {useFonts} from 'expo-font'
 import { ColorValue, Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
-
+import Restaurant from './Restaurant';
+import Create from './create';
 import {icons} from '../../constants';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Study from './Study';
+import Setting from './Settings';
+
 
 type tabIcon={
   icon?:ImageSourcePropType,
@@ -17,6 +22,8 @@ type tabIcon={
   name?:string,
   focused?:boolean
 }
+
+const tab = createMaterialTopTabNavigator()
 
 const TabsItem = ({icon,color,name,focused}:tabIcon) => {
   return (
@@ -27,7 +34,7 @@ const TabsItem = ({icon,color,name,focused}:tabIcon) => {
       tintColor={color}
       style={styles.TabsIcon}
       />
-      <Text style={[styles.TabsTitle,{color:color,fontFamily:`${focused ? 'Poppins-SemiBold' : 'Poppins-Regular'}`}]}>
+      <Text style={[styles.TabsTitle,{color:color,fontFamily:`${ 'sans-serif'}`}]}>
          {name}
       </Text>
     </View>
@@ -35,12 +42,12 @@ const TabsItem = ({icon,color,name,focused}:tabIcon) => {
 }
 
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createBottomTabNavigator()
 
 export default function TabLayout() {
   
   return (
-  <Tabs
+    <Tab.Navigator
   screenOptions={
     {
       tabBarShowLabel:false,
@@ -54,68 +61,126 @@ export default function TabLayout() {
       }
     }
   }>
-    <Tabs.Screen 
-      name='home'
-      options={{
-        title:'Home',
-        headerShown:false,
-        tabBarIcon:({color,focused}:tabIcon)=>(
-          <TabsItem
-          icon={icons.home}
-          color={color}
-          name='Home'
-          focused={focused}
-          />
-        )
-      }}
-    />
-    <Tabs.Screen 
-      name='bookmark'
-      options={{
-        title:'Bookmark',
-        headerShown:false,
-        tabBarIcon:({color,focused}:tabIcon)=>(
-          <TabsItem
-          icon={icons.bookmark}
-          color={color}
-          name='Bookmark'
-          focused={focused}
-          />
-        )
-      }}
-    />
-    <Tabs.Screen 
-      name='create'
-      options={{
-        title:'Create',
-        headerShown:false,
-        tabBarIcon:({color,focused}:tabIcon)=>(
-          <TabsItem
-          icon={icons.plus}
-          color={color}
-          name='Create'
-          focused={focused}
-          />
-        )
-      }}
-    />
-    <Tabs.Screen 
-      name='profile'
-      options={{
-        title:'Profile',
-        headerShown:false,
-        tabBarIcon:({color,focused}:tabIcon)=>(
-          <TabsItem
-          icon={icons.profile}
-          color={color}
-          name='Profile'
-          focused={focused}
-          />
-        )
-      }}
-    />
 
-  </Tabs>
+<Tab.Screen name='Study'
+      component={Study} 
+      options={{
+        // title:'Restaurant',
+        headerShown:false,
+        tabBarIcon:({color,focused}:tabIcon)=>(
+          <TabsItem
+          icon={icons.studying}
+          color={color}
+          name='Study'
+          focused={focused}
+      />)}}
+      ></Tab.Screen>
+
+    <Tab.Screen name='Restaurant'
+      component={Restaurant} 
+      options={{
+        // title:'Restaurant',
+        headerShown:false,
+        tabBarIcon:({color,focused}:tabIcon)=>(
+          <TabsItem
+          icon={icons.restaurant}
+          color={color}
+          name='Restaurant'
+          focused={focused}
+      />)}}
+      ></Tab.Screen>
+ 
+ <Tab.Screen name='Setting'
+      component={Setting} 
+      options={{
+        // title:'Restaurant',
+        headerShown:false,
+        tabBarIcon:({color,focused}:tabIcon)=>(
+          <TabsItem
+          icon={icons.setting}
+          color={color}
+          name='Setting'
+          focused={focused}
+      />)}}
+      ></Tab.Screen>
+
+  </Tab.Navigator>
+  // <Tabs
+  // screenOptions={
+  //   {
+  //     tabBarShowLabel:false,
+  //     tabBarActiveTintColor:'#FFA001',
+  //     tabBarInactiveTintColor:'#CDCDE0',
+  //     tabBarStyle:{
+  //       backgroundColor:'#161622',
+  //       borderTopWidth:1,
+  //       borderTopColor:'#232533', 
+  //       height:84,
+  //     }
+  //   }
+  // }>
+  //   <Tabs.Screen 
+  //     name='Restaurant'
+  //     options={{
+  //       title:'Restaurant',
+  //       headerShown:false,
+  //       tabBarIcon:({color,focused}:tabIcon)=>(
+  //         <TabsItem
+  //         icon={icons.Restaurant}
+  //         color={color}
+  //         name='Restaurant'
+  //         focused={focused}
+  //         />
+  //       )
+  //     }}
+  //   />
+  //   <Tabs.Screen 
+  //     name='bookmark'
+  //     options={{
+  //       title:'Bookmark',
+  //       headerShown:false,
+  //       tabBarIcon:({color,focused}:tabIcon)=>(
+  //         <TabsItem
+  //         icon={icons.bookmark}
+  //         color={color}
+  //         name='Bookmark'
+  //         focused={focused}
+  //         />
+  //       )
+  //     }}
+  //   />
+  //   <Tabs.Screen 
+  //     name='create'
+  //     options={{
+  //       title:'Create',
+  //       headerShown:false,
+  //       tabBarIcon:({color,focused}:tabIcon)=>(
+  //         <TabsItem
+  //         icon={icons.plus}
+  //         color={color}
+  //         name='Create'
+  //         focused={focused}
+  //         />
+  //       )
+  //     }}
+  //   />
+  //   <Tabs.Screen 
+  //     name='profile'
+  //     options={{
+  //       title:'Profile',
+  //       headerShown:false,
+  //       tabBarIcon:({color,focused}:tabIcon)=>(
+  //         <TabsItem
+  //         icon={icons.profile}
+  //         color={color}
+  //         name='Profile'
+  //         focused={focused}
+  //         />
+  //       )
+  //     }}
+  //   />
+
+  // </Tabs>
 
   );
 }
@@ -148,9 +213,9 @@ const styles = StyleSheet.create({
 // <Tabs.Screen
 //   name="index"
 //   options={{
-//     title: 'Home',
+//     title: 'Restaurant',
 //     tabBarIcon: ({ color, focused }) => (
-//       <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+//       <TabBarIcon name={focused ? 'Restaurant' : 'Restaurant-outline'} color={color} />
 //     ),
 //   }}
 // />
